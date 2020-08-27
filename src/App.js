@@ -1,40 +1,62 @@
 import React, { Component } from 'react';
 
-export class Barra extends Component {
-  render = () =>
-    <div className="nabvar">
-      <h4 className="bg-primary text-white text-center p-2">
+function Barra() {
+  return (
+    <div className="nabvar  bg-primary text-white text-center p-2 mb-3">
+      <div className="navbar-brand">
       Calculadora de masa
-      </h4>
-      <div className="nav">
-        <a className="nav-link" href="/">Calculadora</a>
-        <a className="nav-link" href="#">Recetas</a>
       </div>
-    </div>
+      <div className="nav">
+        <a className="nav-link btn btn-info text-white mr-3" href="/">Calculadora</a>
+        <a className="nav-link btn btn-info text-white mr-3" href="#">Recetas</a>
+      </div>
+    </div>)
 }
 
 export class Pedido extends Component {
-  gramosBollo; cantidadBollos
+  constructor(props) {
+    super(props);    
+    this.state = {
+      masaSeleccionada: "",
+      gramosBollo: null,
+      cantidadBollos: null,
+      totalMasaPedido: null
+    }
+  }
+
+  agregaLineaPedido = () => {
+    //this.setState({ masaSeleccionada: event.target.value });
+    
+  }
+
+  
 
   render = () =>
-  <div> 
+  <div className="container-fluid"> 
     <form>
-      <label htmlFor="tipoMasa">Seleccione tipo de masa:</label>
-      <select id="tipoMasa" name="tipoMasa">
-        <option value="viena">Viena</option>
-        <option value="brioche">Brioche</option>
-        <option value="muffin">Muffin</option>
-        <option value="pizza">Pizza</option>
-      </select>
+      <div>
+      <label htmlFor="masaSeleccionada">Seleccione tipo de masa:</label>
+        <select id="masaSeleccionada" name="masaSeleccionada">
+          <option value="viena">Viena</option>
+          <option value="brioche">Brioche</option>
+          <option value="muffin">Muffin</option>
+          <option value="pizza">Pizza</option>
+        </select>
+      </div>
+      <div>
       <label htmlFor="gramosBollo">Gramos de cada bollo:</label>
-      <input name="gramosBollo"></input>
+        <input className="d-inline-flex" name="gramosBollo"></input>
+      </div>
+      <div>
       <label htmlFor="cantidadBollos">Cantidad bollos:</label>
-      <input name="cantidadBollos"></input>
-      <button type="submit">Agregar</button>
-      <h6>masa necesaria { this.gramosBollo * this.cantidadBollos} gramos</h6>
+        <input className="d-inline-flex" name="cantidadBollos"></input>
+        <h6>masa yyyy necesaria, xxx gramos</h6>
+      </div>
+      <button className="btn btn-primary" onClick={ this.agregaLineaPedido }>Agregar</button>
+      
     </form>
     <hr></hr>
-    //tabla formando pedido
+    
   </div>
 }
 
@@ -51,30 +73,16 @@ export default class App extends Component {
             </Pedido>
             <hr></hr>
             <Ingredientes>
-              // tabla muestra ingredientes y peso para cada masa
+              
             </Ingredientes>
           </div>    
 }
+/*  original de create-react-app
+
+import logo from './logo.svg';
+import './App.css';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import logo from './logo.svg';
-//import './App.css';
-
-/*
 function App() {
   return (
     <div className="App">
