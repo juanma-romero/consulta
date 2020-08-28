@@ -39,7 +39,7 @@ export class HacePedido extends Component {
       totalMasaPedido: null
     }
   }
-
+  
   render = () =>
   <div className="container-fluid"> 
     <form>
@@ -82,11 +82,14 @@ export class PedidoRow extends Component {
       </tr>
     )}
 }
+
 export class TablaPedido extends Component {  
   render() {
     const pedidoParaTabla = pedidoMuestra.map( pedido => 
       <PedidoRow key={pedido.id} pedido={pedido} />)
     return (
+      <div className="container-fluid">
+      <h6> Masas y cantidades a elaborar </h6>
       <table className="bordered-table">
         <thead>
           <tr>
@@ -100,6 +103,8 @@ export class TablaPedido extends Component {
       {pedidoParaTabla}
       </tbody>
       </table>
+      <button className="btn btn-primary my-3" onClick={ this.agregaLineaPedido }>Calcular</button>
+      </div>
     )
   }
 }
@@ -113,9 +118,11 @@ function Pedido() {
 }
 
 export class Ingredientes extends Component {
-  render = () => <h4>tabla muestra ingredientes y peso para cada masa</h4>
+  render = () => 
+    <div className="container-fluid">
+      <h4>tabla muestra resultado, ingredientes y peso para cada masa</h4>
+    </div>
 }
-
 
 export default class App extends Component {  
   render = () => 
