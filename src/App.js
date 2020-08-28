@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
 
+const pedidoMuestra = [
+  {
+    id: 1,
+    masaSeleccionada: "viena",
+    gramosBollo: 140,
+    cantidadBollos: 100,
+    totalMasaPedido: 1400
+  },
+  {
+    id: 2,
+    masaSeleccionada: "pizza",
+    gramosBollo: 450,
+    cantidadBollos: 10,
+    totalMasaPedido: 4500
+  }]
+
 function Barra() {
   return (
     <div className="nabvar  bg-primary text-white text-center p-2 mb-3">
@@ -8,12 +24,12 @@ function Barra() {
       </div>
       <div className="nav">
         <a className="nav-link btn btn-info text-white mr-3" href="/">Calculadora</a>
-        <a className="nav-link btn btn-info text-white mr-3" href="#">Recetas</a>
+        <a className="nav-link btn btn-info text-white mr-3" href="/">Recetas</a>
       </div>
     </div>)
 }
 
-export class Pedido extends Component {
+export class HacePedido extends Component {
   constructor(props) {
     super(props);    
     this.state = {
@@ -23,13 +39,6 @@ export class Pedido extends Component {
       totalMasaPedido: null
     }
   }
-
-  agregaLineaPedido = () => {
-    //this.setState({ masaSeleccionada: event.target.value });
-    
-  }
-
-  
 
   render = () =>
   <div className="container-fluid"> 
@@ -55,9 +64,52 @@ export class Pedido extends Component {
       <button className="btn btn-primary" onClick={ this.agregaLineaPedido }>Agregar</button>
       
     </form>
+    
     <hr></hr>
     
   </div>
+}
+
+export class PedidoRow extends Component {
+  render() {
+    const pedido = this.props.pedido 
+    return (
+      <tr>
+        <td>{pedido.masaSeleccionada}</td>
+        <td>{pedido.gramosBollo}</td>
+        <td>{pedido.cantidadBollos}</td>
+        <td>{pedido.totalMasaPedido}</td>
+      </tr>
+    )}
+}
+export class TablaPedido extends Component {  
+  render() {
+    const pedidoParaTabla = pedidoMuestra.map( pedido => 
+      <PedidoRow key={pedido.id} pedido={pedido} />)
+    return (
+      <table className="bordered-table">
+        <thead>
+          <tr>
+            <th>Masa</th>
+            <th>Gramos</th>
+            <th>Cantidad</th>
+            <th>Total parcial</th>
+          </tr>
+        </thead>
+      <tbody>
+      {pedidoParaTabla}
+      </tbody>
+      </table>
+    )
+  }
+}
+
+function Pedido() {
+  return (
+    <div>
+      <HacePedido />
+      <TablaPedido />
+    </div>)
 }
 
 export class Ingredientes extends Component {
@@ -77,31 +129,3 @@ export default class App extends Component {
             </Ingredientes>
           </div>    
 }
-/*  original de create-react-app
-
-import logo from './logo.svg';
-import './App.css';
-
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;*/
